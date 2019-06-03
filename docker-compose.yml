@@ -1,0 +1,18 @@
+version: '3.1'
+
+networks:
+  docker_network:
+
+services:
+  nginx_service:
+    image: nginx:stable
+    container_name: docker-nginx
+    ports:
+      - 8888:80
+    volumes:
+      - ./www:/usr/share/nginx/html
+      - ./nginx/site.conf:/etc/nginx/conf.d/site.conf
+    restart:
+      on-failure
+    networks:
+      - docker_network
